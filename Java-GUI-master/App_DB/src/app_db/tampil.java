@@ -3,40 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package penerbit;
+package app_db;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
-
-
 /**
  *
  * @author dian
  */
-public final class penerbit extends javax.swing.JFrame {
-    public Connection con;
+public class tampil extends javax.swing.JFrame {
+public Connection con;
     public Statement st;
     public ResultSet rs;
     public DefaultTableModel model;
     /**
-     * Creates new form penerbit
+     * Creates new form tampil
      */
-    public penerbit() {
+    public tampil() {
         initComponents();
-        String[] header = {"id","penerbit","kota"};
+        String[] header = {"ID","Nama","Kota"};
         model = new DefaultTableModel(header,0);
         table.setModel(model);
         tampil();
     }
     
     public void tampil(){
-        koneksi classKoneksi = new koneksi();
+        db classKoneksi = new db();
         try{
-            con = koneksi.getKoneksi();
+            con = db.getKoneksi();
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * FROM penerbit");
+            rs = st.executeQuery("SELECT * FROM tblData");
             while(rs.next()){
                 String[] row = {rs.getString(1),rs.getString(2),rs.getString(3)};
                 model.addRow(row);
@@ -60,7 +58,7 @@ public final class penerbit extends javax.swing.JFrame {
         table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tabel  Penerbit");
+        setTitle("Tabel Data");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,17 +77,17 @@ public final class penerbit extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,20 +110,20 @@ public final class penerbit extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(penerbit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tampil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(penerbit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tampil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(penerbit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tampil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(penerbit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tampil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new penerbit().setVisible(true);
+                new tampil().setVisible(true);
             }
         });
     }
